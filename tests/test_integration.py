@@ -38,13 +38,13 @@ def test_multiple_directories():
     b.init_app(app)
 
     with app.test_request_context():
-        translations = b.list_translations()
+        translations = sorted(b.list_translations(), key=str)
 
         assert len(translations) == 4
         assert str(translations[0]) == "de"
-        assert str(translations[1]) == "ja"
-        assert str(translations[2]) == "de"
-        assert str(translations[3]) == "de_DE"
+        assert str(translations[1]) == "de"
+        assert str(translations[2]) == "de_DE"
+        assert str(translations[3]) == "ja"
 
         assert gettext("Hello %(name)s!", name="Peter") == "Hallo Peter!"
 

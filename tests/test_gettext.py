@@ -91,11 +91,11 @@ def test_list_translations():
     b = babel.Babel(app, default_locale="de_DE")
 
     with app.app_context():
-        translations = b.list_translations()
+        translations = sorted(b.list_translations(), key=str)
         assert len(translations) == 3
         assert str(translations[0]) == "de"
-        assert str(translations[1]) == "ja"
-        assert str(translations[2]) == "de_DE"
+        assert str(translations[1]) == "de_DE"
+        assert str(translations[2]) == "ja"
 
 
 def test_list_translations_default_locale_exists():
@@ -103,7 +103,7 @@ def test_list_translations_default_locale_exists():
     b = babel.Babel(app, default_locale="de")
 
     with app.app_context():
-        translations = b.list_translations()
+        translations = sorted(b.list_translations(), key=str)
         assert len(translations) == 2
         assert str(translations[0]) == "de"
         assert str(translations[1]) == "ja"
